@@ -1,0 +1,14 @@
+.idea
+.DS_Store
+
+cdk/*.js
+!jest.config.js
+cdk/*.d.ts
+node_modules
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+build/*
+coverage.out
