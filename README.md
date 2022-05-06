@@ -8,8 +8,8 @@
 - [ ] Update the Deploy Status badge URL in this README
 - [ ] Replace the role-arn in `.github/workflows/*.yaml`
 - [ ] Update the go.mod with a correct module reference for this repo
+- [ ] Update package.json with correct repo references
 - [ ] Change the stack name in `cdk/bin/cdk.ts` line 7
-- [ ] Add a secret with a Github Personal Access Token named PAT (for the automated changelog)
 
 **Import Notes**
 
