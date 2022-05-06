@@ -22,9 +22,9 @@ jobs:
           role-to-assume: arn:aws:iam::YOURROLE:role/GithubActionsDeployRole
           aws-region: us-west-2
       - name: Install Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v3
         with:
-          go-version: 1.17.x
+          go-version: '^1.18.0'
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
@@ -34,5 +34,7 @@ jobs:
         run: make test all
       - name: Install dependencies
         run: npm install --ci
+        working-directory: ./cdk
       - name: CDK diff
         run: npx cdk diff
+        working-directory: ./cdk

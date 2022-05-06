@@ -1,0 +1,19 @@
+{
+  "author": "CHANGE ME",
+  "bugs": {
+    "url": "https://github.com/bkono/golambdatmpl/issues"
+  },
+  "description": "A template to be CHANGED.",
+  "homepage": "https://github.com/bkono/golambdatmpl#readme",
+  "license": "UNLICENSED",
+  "main": "cmd/main.go",
+  "name": "golambdatmpl",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bkono/golambdatmpl.git"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "version": "0.0.1"
+}
