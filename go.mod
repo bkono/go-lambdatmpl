@@ -1,8 +1,12 @@
 module github.com/bkono/golambdatmpl
 
-go 1.17
+go 1.18
 
-require github.com/golangci/golangci-lint v1.45.2
+require (
+	github.com/aws/aws-lambda-go v1.31.1
+	github.com/aws/aws-sdk-go v1.44.8
+	github.com/golangci/golangci-lint v1.45.2
+)
 
 require (
 	4d63.com/gochecknoglobals v0.1.0 // indirect
@@ -15,8 +19,6 @@ require (
 	github.com/alexkohler/prealloc v1.0.0 // indirect
 	github.com/ashanbrown/forbidigo v1.3.0 // indirect
 	github.com/ashanbrown/makezero v1.1.1 // indirect
-	github.com/aws/aws-lambda-go v1.31.1 // indirect
-	github.com/aws/aws-sdk-go v1.44.8 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/bkielbasa/cyclop v1.2.0 // indirect
 	github.com/blizzy78/varnamelen v0.6.1 // indirect
@@ -72,6 +74,7 @@ require (
 	github.com/jgautheron/goconst v1.5.1 // indirect
 	github.com/jingyugao/rowserrcheck v1.1.1 // indirect
 	github.com/jirfag/go-printf-func-name v0.0.0-20200119135958-7558a9eaa5af // indirect
+	github.com/jmespath/go-jmespath v0.4.0 // indirect
 	github.com/julz/importas v0.1.0 // indirect
 	github.com/kisielk/errcheck v1.6.0 // indirect
 	github.com/kisielk/gotool v1.0.0 // indirect

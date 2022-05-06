@@ -10,11 +10,11 @@ COVERPKG ?= -coverpkg ./internal/... -coverpkg ./lambdas/... -coverpkg ./pkg/...
 
 # things to build
 rwildcard=$(foreach d,$(wildcard $(1:=/*)),$(call rwildcard,$d,$2) $(filter $(subst *,%,$2),$d))
-MAINS := $(call rwildcard,lambdas,*main.go)
-LAMBDAS := $(patsubst lambdas/%/main.go,%,$(MAINS))
+LAMBDAS := $(patsubst lambdas/%/main.go,%,$(call rwildcard,lambdas,*main.go))
+CMDS := $(patsubst cmd/%/main.go,%,$(call rwildcard,cmd,*main.go))
 
 .PHONY: all
-all: $(LAMBDAS)
+all: $(LAMBDAS) $(CMDS)
 
 .PHONY: $(LAMBDAS)
 $(LAMBDAS): clean lint
@@ -24,13 +24,19 @@ $(LAMBDAS): clean lint
 	@echo "ziping..."
 	@zip -j -X build/$@.zip build/$@
 
+.PHONY: $(CMDS)
+$(CMDS): clean lint
+	@echo "building $@..."
+	@GOOS=linux GOARCH=amd64 go build -trimpath $(GO_LDFLAGS) $(BUILDARGS) -o build/$@-linux-amd64 ./cmd/$@/.
+	@GOOS=darwin GOARCH=amd64 go build -trimpath $(GO_LDFLAGS) $(BUILDARGS) -o build/$@-darwin-amd64 ./cmd/$@/.
 .PHONY: clean
+
 clean:
 	@rm -rf ./build/*
 
 .PHONY: lint
 lint:
-	go run github.com/golangci/golangci-lint/cmd/golangci-lint run ./internal/... ./lambdas/... ./pkg/...
+	go run github.com/golangci/golangci-lint/cmd/golangci-lint run ./cmd/... ./internal/... ./lambdas/... ./pkg/...
 
 .PHONY: gen
 gen:
@@ -39,10 +45,10 @@ gen:
 .PHONY: test
 test:
 	@go clean -testcache
-	go test -v -timeout=180s -tags 'test' ./internal/... ./lambdas/... ./pkg/...
+	go test -v -timeout=180s -tags 'test' ./cmd/... ./internal/... ./lambdas/... ./pkg/...
 
 cover:
 	@go clean -testcache
-	go test -v -timeout=180s $(COVERPKG) -coverprofile=coverage.out -tags 'test' ./internal/... ./lambdas/... ./pkg/...
+	go test -v -timeout=180s $(COVERPKG) -coverprofile=coverage.out -tags 'test' ./cmd/... ./internal/... ./lambdas/... ./pkg/...
 	@go tool cover -html=coverage.out
 
