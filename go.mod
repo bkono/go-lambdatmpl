@@ -6,6 +6,7 @@ require (
 	github.com/aws/aws-lambda-go v1.31.1
 	github.com/aws/aws-sdk-go v1.44.8
 	github.com/golangci/golangci-lint v1.45.2
+	github.com/matryer/is v1.4.0
 )
 
 require (
